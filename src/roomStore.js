@@ -8,9 +8,9 @@ class RoomStore {
     makeObservable(this, {
       rooms: observable,
       fetchRooms: action,
-      // createRoom: action,
-      // deleteRoom: action,
-      // updateRoom: action,
+      createRoom: action,
+      deleteRoom: action,
+      updateRoom: action,
     });
   }
 
