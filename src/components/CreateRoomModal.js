@@ -1,7 +1,9 @@
 import { Modal, Button, InputGroup, Form } from "react-bootstrap";
 import React, { useState } from "react";
+import roomStore from "../roomStore";
+import { observer } from "mobx-react";
 
-export default function CreateRoomModal(props) {
+function CreateRoomModal(props) {
   const [room, setRoom] = useState({
     title: "",
     image: "",
@@ -13,7 +15,7 @@ export default function CreateRoomModal(props) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.createRoom(room);
+    roomStore.createRoom(room);
     props.closeModal(); // this is to close the modal that is shown
   };
   return (
@@ -51,3 +53,5 @@ export default function CreateRoomModal(props) {
     </Modal>
   );
 }
+
+export default observer(CreateRoomModal);
