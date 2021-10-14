@@ -39,7 +39,7 @@ class RoomStore {
 
   deleteRoom = async (id) => {
     try {
-      const response = await axios.delete(
+      await axios.delete(
         `https://coded-task-axios-be.herokuapp.com/rooms/${id}`
       );
       this.rooms = this.rooms.filter((room) => room.id !== id);
@@ -57,6 +57,20 @@ class RoomStore {
       this.rooms = this.rooms.map((room) =>
         room.id === updatedRoom.id ? response.data : room
       );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  createMsg = async (roomId, msg) => {
+    try {
+      const response = await axios.post(
+        `https://coded-task-axios-be.herokuapp.com/rooms/msg/${roomId}`,
+        msg
+      );
+
+      const room = this.rooms.find((room) => room.id === roomId);
+      room.messages.push(response.data);
     } catch (error) {
       console.log(error);
     }
